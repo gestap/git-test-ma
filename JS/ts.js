@@ -64,31 +64,14 @@
 		return res;
 	}
 
-	function codeToOp(num){
-		var res;
-
-		if (num == 0){
-			res = "+";
-		} else if (num == 1) {
-			res = "-";
-		}else if (num == 2) {
-			res = "*";
-		}else if (num == 3) {
-			res = "/";
-		} else{
-			res = " ";
-		}
-		return res;
-	}
-
 	var x, y, code, op, ans, res, ansStr;
-
+	var variants = ["+", "-", "*", "/"];
 	for (var i = 0; i < 10; i++){																						  
 
 		x = randomInt(3, 15);																						  
 		y = randomInt(3, 15);
 		code = randomInt(0, 3);	
-		op = codeToOp(code);																					 																										  //
+		op = variants[code];																					 																										  //
 		res = mathOp(x, y, op);																								  
 																													  
 		do{
