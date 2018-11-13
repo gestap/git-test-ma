@@ -64,29 +64,34 @@
 		return res;
 	}
 
-	var x, y, code, op, ans, res, ansStr;
+	var x, y, code, op, ans, res, ansStr, error = 0, good = 0, erros = [];
 	var variants = ["+", "-", "*", "/"];
-	for (var i = 0; i < 10; i++){																						  
+	for (var i = 0; i < 10; i++){
 
-		x = randomInt(3, 15);																						  
+		x = randomInt(3, 15);
 		y = randomInt(3, 15);
-		code = randomInt(0, 3);	
-		op = variants[code];																					 																										  //
-		res = mathOp(x, y, op);																								  
-																													  
+		code = randomInt(0, 3);
+		op = variants[code];
+		res = mathOp(x, y, op);
+
 		do{
 			ansStr = prompt( x + '' + op + '' + y + " = ?" );
 			ans = +ansStr;
 		}
 		while (ansStr == null || isNaN(ans));
 
-		
-		if (ans.toFixed(2) == res.toFixed(2)) {																								  
-			console.log("Good");																							 
-		} else{																											  
-			console.log("Wrong, result = " + res.toFixed(2));																							  //
-		}																												  
-																														  
+		if (ans.toFixed(2) == res.toFixed(2)) {	  
+			good++;
+		} else{
+			error++;
+			erros.push(x + '' + op + '' + y + " = " + res.toFixed(2) + ". Your answer  " + ans.toFixed(2));
+		}
+	}
+
+	console.log('Correct answers: ' + good);
+	console.log('Wrong answers:' + error);
+	for(var i = 0; i < erros.length; i++){
+		console.log(erros[i]);
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
