@@ -1,7 +1,7 @@
 
 
 	// // // // // // // // // // // // // // // // // // //  Пошук серднього між 3-ма числами // // // // // // // // // // // 
-
+	/*
 	var a = +prompt("Add number 1" , " ");																					// 
 	var b = +prompt("Add number 2" , " ");																					// 
 	var c = +prompt("Add number 3" , " ");																					// 
@@ -26,11 +26,14 @@
 	} else{																													// 
 		res = c;																											// 
 		console.log(res);																									// 
-	}																														// 
+	}	*/																													// 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-
-
+	window.onload = function() {
+  		document.querySelector('.btnStart').onclick = function(){
+  			training();
+  		}
+	};
 
 
 	// // // // // // // // // // // // // // // // // // //  Математичний тренажер // // // // // // // // // // // // // //
@@ -64,36 +67,41 @@
 		return res;
 	}
 
-	var x, y, code, op, ans, res, ansStr, error = 0, good = 0, erros = [];
-	var variants = ["+", "-", "*", "/"];
-	for (var i = 0; i < 10; i++){
+	function training(argument) {
+	
+		var x, y, code, op, ans, res, ansStr, error = 0, good = 0, erros = [];
+		var variants = ["+", "-", "*", "/"];
+		for (var i = 0; i < 10; i++){
 
-		x = randomInt(3, 15);
-		y = randomInt(3, 15);
-		code = randomInt(0, 3);
-		op = variants[code];
-		res = mathOp(x, y, op);
+			x = randomInt(3, 15);
+			y = randomInt(3, 15);
+			code = randomInt(0, 3);
+			op = variants[code];
+			res = mathOp(x, y, op);
 
-		do{
-			ansStr = prompt( x + '' + op + '' + y + " = ?" );
-			ans = +ansStr;
+			do{
+				ansStr = prompt( x + '' + op + '' + y + " = ?" );
+				ans = +ansStr;
+			}
+			while (ansStr == null || isNaN(ans));
+
+			if (ans.toFixed(2) == res.toFixed(2)) {	  
+				good++;
+			} else{
+				error++;
+				erros.push(x + '' + op + '' + y + " = " + res.toFixed(2) + ". Your answer:  " + ans.toFixed(2));
+			}
 		}
-		while (ansStr == null || isNaN(ans));
-
-		if (ans.toFixed(2) == res.toFixed(2)) {	  
-			good++;
-		} else{
-			error++;
-			erros.push(x + '' + op + '' + y + " = " + res.toFixed(2) + ". Your answer  " + ans.toFixed(2));
+		document.querySelector('.good').innerHTML = good;
+		document.querySelector('.bad').innerHTML = error;
+		// console.log('Correct answers: ' + good);
+		// console.log('Wrong answers:' + error);
+		var divErrors = document.querySelector(".errors");
+		divErrors.innerHTML = " ";
+		for(var i = 0; i < erros.length; i++){
+			divErrors.innerHTML +=  ("<p>" + erros[i] + "</p>");
 		}
 	}
-
-	console.log('Correct answers: ' + good);
-	console.log('Wrong answers:' + error);
-	for(var i = 0; i < erros.length; i++){
-		console.log(erros[i]);
-	}
-
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 
