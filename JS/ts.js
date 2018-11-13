@@ -35,27 +35,77 @@
 
 	// // // // // // // // // // // // // // // // // // //  Математичний тренажер // // // // // // // // // // // // // //
 
-	for (var i =0; i < 10; i++){																						  //
 
-		var x = Math.floor(Math.random() * 11);																			  //
-		var y = Math.floor(Math.random() * 11);																			  //
-		var ans;																										  //
-		var res = x * y;																								  //
-		ans = +prompt( x + " * " + y + " = ?" );																		  //
+	function randomInt(min, max){
+		var length = max - min + 1;
+		var rand = Math.floor(Math.random() * length) + min;
+		return rand;
+	}
 
-		while( isNaN(res) || isNaN(res) ){																				  //
-			ans = +prompt( x + " * " + y + " = ?" );																	  //
-		}																												  //
+	function mathOp(a, b, op){
+		var res;
 
-		if (ans == res) {																								  //
-			console.log(true);																							  //
-		} else{																											  //
-			console.log(false);																							  //
-		}																												  //
-																														  //
-	}																													  //
+		if (op == "+") {
+			res = a + b;
+		} else if (op == "-"){
+			res = a - b;
+		} else if (op == "*"){
+			res = a * b;
+		}else if (op == "/") {
+			if (b == "0"){
+				res = false;
+			} else{
+				res = a / b;
+			}
+		} else{
+			res = false;
+		}
+
+		return res;
+	}
+
+	function codeToOp(num){
+		var res;
+
+		if (num == 0){
+			res = "+";
+		} else if (num == 1) {
+			res = "-";
+		}else if (num == 2) {
+			res = "*";
+		}else if (num == 3) {
+			res = "/";
+		} else{
+			res = " ";
+		}
+		return res;
+	}
+
+	var x, y, code, op, ans, res, ansStr;
+
+	for (var i = 0; i < 10; i++){																						  
+
+		x = randomInt(3, 15);																						  
+		y = randomInt(3, 15);
+		code = randomInt(0, 3);	
+		op = codeToOp(code);																					 																										  //
+		res = mathOp(x, y, op);																								  
+																													  
+		do{
+			ansStr = prompt( x + '' + op + '' + y + " = ?" );
+			ans = +ansStr;
+		}
+		while (ansStr == null || isNaN(ans));
+
+		
+		if (ans.toFixed(2) == res.toFixed(2)) {																								  
+			console.log("Good");																							 
+		} else{																											  
+			console.log("Wrong, result = " + res.toFixed(2));																							  //
+		}																												  
+																														  
+	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-
 
 
