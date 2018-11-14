@@ -94,13 +94,12 @@
 		}
 		document.querySelector('.good').innerHTML = good;
 		document.querySelector('.bad').innerHTML = error;
-		// console.log('Correct answers: ' + good);
-		// console.log('Wrong answers:' + error);
 		var divErrors = document.querySelector(".errors");
 		divErrors.innerHTML = " ";
 		for(var i = 0; i < erros.length; i++){
 			divErrors.innerHTML +=  ("<p>" + erros[i] + "</p>");
 		}
+	
 	}
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
